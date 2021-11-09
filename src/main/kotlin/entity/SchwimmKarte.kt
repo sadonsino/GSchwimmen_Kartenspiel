@@ -2,6 +2,7 @@ package entity
 
 data class SchwimmKarte(val farbe : CardSuit, val wert : CardValue) {
 
+
     fun karteWert() : Int
     {
         return try
