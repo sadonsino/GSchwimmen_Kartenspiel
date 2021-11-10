@@ -10,7 +10,6 @@ class SpielerTest {
     private val spieler1 : Spieler = Spieler("Sadoun")
     private val spieler2 : Spieler = Spieler("")
     private val spieler3 : Spieler = Spieler("")
-    private val spieler4 : Spieler = Spieler("Max")
 
     @Test
             /**
