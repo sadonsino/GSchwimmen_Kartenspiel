@@ -14,7 +14,7 @@ class Spieler( val spielerName : String ) {
     var geklopft : Boolean = false
     var punkte : Double = 0.0
     var hand : ArrayDeque<SchwimmKarte> = ArrayDeque<SchwimmKarte>(3)
-    // gibt die SpielerName und die drei Karten, die das er hat, zurück
+    /* gibt die SpielerName und die drei Karten, die das er hat, zurück */
     override fun toString() : String
     {
         return "$spielerName hat diesen Karten: ${hand.toString()}"
