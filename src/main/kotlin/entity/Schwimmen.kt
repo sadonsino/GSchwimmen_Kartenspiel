@@ -1,5 +1,4 @@
 package entity
-
 /**
  * Klasse, die einen Spielzustand von "Schwimmen" darstellt.
  * @param spieler enthält alle Spieler
