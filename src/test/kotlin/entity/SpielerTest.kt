@@ -12,6 +12,12 @@ class SpielerTest {
     private val spieler1 : Spieler = Spieler("Sadoun")
     private val spieler2 : Spieler = Spieler("")
     private val spieler3 : Spieler = Spieler("")
+    @BeforeTest
+    fun inHandHinzufuegen()
+    {
+        spieler1.hand.add(SchwimmKarte(CardSuit.HEARTS,CardValue.FIVE))
+        spieler1.hand.add(SchwimmKarte(CardSuit.SPADES,CardValue.FIVE))
+    }
 
     /**
      * teste, ob toString für einige TestSpieler die richtigen Strings erzeugt
@@ -19,8 +25,6 @@ class SpielerTest {
     @Test
     fun testToString()
     {
-        spieler1.hand.add(SchwimmKarte(CardSuit.HEARTS,CardValue.FIVE))
-        spieler1.hand.add(SchwimmKarte(CardSuit.SPADES,CardValue.FIVE))
         assertEquals(spieler1.toString(),"Sadoun hat diesen Karten: "+spieler1.hand.toString())
     }
     /**
