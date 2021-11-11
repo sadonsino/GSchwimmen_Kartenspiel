@@ -4,6 +4,10 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 
+/**
+ * SpielerTest ist die Klasse, die Funktionalität der Klasse SchimmKarte Überprüft
+ */
+
 class SchimmKarteTest {
     /**
      * Karten, mit denen des Testes überführen konnte
@@ -14,16 +18,19 @@ class SchimmKarteTest {
     private val zehnKreuz : SchwimmKarte= SchwimmKarte(CardSuit.CLUBS,CardValue.TEN)
     private val andereZehnKreuz : SchwimmKarte= SchwimmKarte(CardSuit.CLUBS,CardValue.TEN)
 
-    // Die Farbe der Karten
+    /**
+     *  Die Farbe der Karten
+     */
 
     private val pick = "♠"
     private val herz = "♥"
     private val karo = "♦"
     private val kreuz = "♣"
+
+    /**
+     * teste, ob toString für einige TestKarten die richtigen Strings erzeugt
+     */
    @Test
-           /**
-            * teste, ob toString für einige TestKarten die richtigen Strings erzeugt
-            */
    fun testToString()
    {
        assertEquals(pick+"8",achtPick.toString())
@@ -31,10 +38,10 @@ class SchimmKarteTest {
        assertEquals(karo+"9",neuenKaro.toString())
        assertEquals(kreuz+"10",zehnKreuz.toString())
    }
+    /**
+     * Teste, ob die Methode, die richtige Wert ausgibt
+     */
     @Test
-            /**
-             * Teste, ob die Methode, die richtige Wert ausgibt
-             */
     fun karteWertTest()
     {
         assertEquals(achtPick.karteWert(),8)
@@ -42,11 +49,11 @@ class SchimmKarteTest {
         assertEquals(neuenKaro.karteWert(),9)
         assertEquals(zehnKreuz.karteWert(),10)
     }
+    /**
+     * Teste, ob die Karten mit gleichen Wert und Farbe gleich sind
+     * oder mit verschiedene Wert und Farbe nicht gleich sind
+     */
     @Test
-            /**
-             * Teste, ob die Karten mit gleichen Wert und Farbe gleich sind
-             * oder mit verschiedene Wert und Farbe nicht gleich sind
-             */
     fun karteEquals()
     {
         assertNotEquals(zehnKreuz,neuenKaro)
