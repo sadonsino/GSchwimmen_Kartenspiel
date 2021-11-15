@@ -15,8 +15,8 @@ class SpielerTest {
     @BeforeTest
     fun inHandHinzufuegen()
     {
-        spieler1.hand.add(SchwimmKarte(CardSuit.HEARTS,CardValue.FIVE))
-        spieler1.hand.add(SchwimmKarte(CardSuit.SPADES,CardValue.FIVE))
+        spieler1.hand.add(SchwimmKarte(CardSuit.HEARTS,CardValue.SEVEN))
+        spieler1.hand.add(SchwimmKarte(CardSuit.SPADES,CardValue.SEVEN))
     }
 
     /**

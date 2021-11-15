@@ -76,17 +76,17 @@ private val CardSuit.row get() = when (this) {
  * a corresponding mapping to be used when addressing the column.
  */
 private val CardValue.column get() = when (this) {
-    CardValue.ACE -> 0
-    CardValue.TWO -> 1
-    CardValue.THREE -> 2
-    CardValue.FOUR -> 3
-    CardValue.FIVE -> 4
-    CardValue.SIX -> 5
-    CardValue.SEVEN -> 6
-    CardValue.EIGHT -> 7
-    CardValue.NINE -> 8
-    CardValue.TEN -> 9
-    CardValue.JACK -> 10
-    CardValue.QUEEN -> 11
-    CardValue.KING -> 12
+     CardValue.ACE -> 0
+     CardValue.TWO -> 1
+     CardValue.THREE -> 2
+     CardValue.FOUR -> 3
+     CardValue.FIVE -> 4
+     CardValue.SIX -> 5
+     CardValue.SEVEN -> 6
+     CardValue.EIGHT -> 7
+     CardValue.NINE -> 8
+     CardValue.TEN -> 9
+     CardValue.JACK -> 10
+     CardValue.QUEEN -> 11
+     CardValue.KING -> 12
 }
