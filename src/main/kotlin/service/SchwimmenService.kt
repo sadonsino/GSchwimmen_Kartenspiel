@@ -18,12 +18,12 @@ class SchwimmenService{
 
     /**
      * Start ein neues Spiel
-     * @param spieler ist ein Feld von Typ Spieler
+     * @param spielerArray ist ein Feld von Typ Spieler
      */
 
-    fun spielStarten (spieler: ArrayDeque<Spieler>)
+    fun spielStarten (spielerArray: ArrayDeque<Spieler>)
     {
-        val schwimmSpiel1 = Schwimmen(spieler)
+        val schwimmSpiel1 = Schwimmen(spielerArray)
         schwimmSpiel1.kartenHinzufügen(defaultRandomCardList())
 
         for (p in 0 until  schwimmSpiel1.spieler.size)
