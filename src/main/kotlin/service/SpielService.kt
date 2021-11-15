@@ -21,11 +21,6 @@ class SpielService(private val schwimmenService : SchwimmenService) : AbstractRe
                 punkte = 30.5
                 return punkte
         }
-        if (hand[0].farbe==hand[1].farbe && hand[1].farbe ==hand[2].farbe)
-        {
-            punkte = 30.5
-            return punkte
-        }
         var herzPunkte = 0.0
         var kreuzPunkte = 0.0
         var karoPunkte = 0.0
@@ -64,7 +59,7 @@ class SpielService(private val schwimmenService : SchwimmenService) : AbstractRe
             }
             if(schwimmSpiel.aktuellerSpielerIndex==schwimmSpiel.spieler.size-1)
             {
-                schwimmSpiel.aktuellerSpielerIndex = 0 ;
+                schwimmSpiel.aktuellerSpielerIndex = 0
             }
             else schwimmSpiel.aktuellerSpielerIndex++
         }
