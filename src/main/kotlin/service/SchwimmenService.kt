@@ -1,14 +1,30 @@
 package service
 import entity.*
 
+/**
+ * HauptKlasse der ServiceSchicht.
+ * Bietet Zugang für alle anderen Serviceklassen
+ */
+
 class SchwimmenService{
-    var schwimmSpiel : Schwimmen? = null
+
     val spielService = SpielService(this)
     val spielerAktionService = SpielerAktionService(this)
+
+    /**
+     * schwimmSpiel ist das aktuelle Spiel. Kann `null` sein, wenn noch kein Spiel gestartet wurde.
+     */
+    var schwimmSpiel : Schwimmen? = null
+
+    /**
+     * Start ein neues Spiel
+     * @param spieler ist ein Feld von Typ Spieler
+     */
+
     fun spielStarten (spieler: ArrayDeque<Spieler>)
     {
         val schwimmSpiel1 = Schwimmen(spieler)
-        schwimmSpiel1.addAufOben(defaultRandomCardList())
+        schwimmSpiel1.kartenHinzufügen(defaultRandomCardList())
 
         for (p in 0 until  schwimmSpiel1.spieler.size)
         {
@@ -27,6 +43,12 @@ class SchwimmenService{
         schwimmSpiel = schwimmSpiel1
 
     }
+
+    /**
+     * Erstellt eine gemischte 32-Karten-Liste aller vier Farben und Karten
+     * von 7 bis Ass
+     * @return eine Liste, die 32 Objekt von SchwimmKarte enthält
+     */
     private fun defaultRandomCardList() = List(32)
     { index ->
         SchwimmKarte(

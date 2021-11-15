@@ -4,11 +4,17 @@ import entity.*
 
 class SpielService(private val schwimmenService : SchwimmenService) : AbstractRefreshingService()
 {
+    /**
+     * Hier wird die Werte der Karten berechnet und
+     * die maximal Punkte von der Karten bezüglich der Logik des Spiels zurückgegeben
+     * @param spieler ist der Spieler, der seine Karten berechnet wird
+     * @return maximale Punkte, was er erreichen kann
+     */
     fun summePunkte (spieler: Spieler) : Double
     {
        val schwimmSpiel = schwimmenService.schwimmSpiel
         checkNotNull(schwimmSpiel)
-        var punkte : Double
+        val punkte : Double
         val hand  = spieler.hand
         if (hand[0].wert==hand[1].wert && hand[1].wert ==hand[2].wert)
         {
@@ -39,40 +45,54 @@ class SpielService(private val schwimmenService : SchwimmenService) : AbstractRe
         punkte = maxOf(herzPunkte,karoPunkte,karoPunkte,pickPunkte)
         return punkte
     }
+
+    /**
+     * Es wird den aktuellerSpielerIndex erhört und zwei Fälle betrachtet:
+     * 1. Wenn den passIndex ist gleich spieler.size, dann muss die Funktion [mitteErneuren()] aufgerufen
+     * 2. Wenn aktuellerSpielerIndex ist gleich spieler.size-1, dann muss aktuellerSpielerIndex
+     * auf 0 gesetzt wird
+     */
     fun naechsterSpieler()
     {
         val schwimmSpiel = schwimmenService.schwimmSpiel
         checkNotNull(schwimmSpiel)
         if (!beendeSpiel())
         {
-            if (schwimmSpiel.passIndex == 4)
+            if (schwimmSpiel.passIndex == schwimmSpiel.spieler.size)
             {
                 mitteErneuren()
             }
-             if(schwimmSpiel.aktuellerSpielerIndex==3)
+            if(schwimmSpiel.aktuellerSpielerIndex==schwimmSpiel.spieler.size-1)
             {
-
                 schwimmSpiel.aktuellerSpielerIndex = 0 ;
-
             }
             else schwimmSpiel.aktuellerSpielerIndex++
         }
 
     }
+
+    /**
+     * Hier wird zurückgegeben, ob das Spiel beendet bezüglich der Logik des Spiels ist oder nicht
+     * @return true, wenn die Ende des Spiels ist oder false, wenn nicht
+     */
     fun beendeSpiel(): Boolean
     {
-        val schimmSpiel = schwimmenService.schwimmSpiel
-        checkNotNull(schimmSpiel)
-       if (stapelLeer()&&schimmSpiel.passIndex==4)
+        val schwimmSpiel = schwimmenService.schwimmSpiel
+        checkNotNull(schwimmSpiel)
+       if (stapelLeer()&&schwimmSpiel.passIndex==schwimmSpiel.spieler.size)
        {
            return true
        }
-       else if (schimmSpiel.klopfIndexe==4  )
+       else if (schwimmSpiel.klopfIndexe==schwimmSpiel.spieler.size  )
        {
             return true
        }
         return false
     }
+
+    /**
+     * Hier wird die Karten von Mitte und entfernt und drei neue Karten von stapel hinzufügt
+     */
     fun mitteErneuren()
     {
         val schwimmSpiel = schwimmenService.schwimmSpiel
@@ -97,6 +117,10 @@ class SpielService(private val schwimmenService : SchwimmenService) : AbstractRe
         }
 
     }
+
+    /**
+     * Hier wird den PassIndex auf 0 gesetzt
+     */
     fun resetPassIndex()
     {
         val schwimmSpiel = schwimmenService.schwimmSpiel
@@ -104,6 +128,11 @@ class SpielService(private val schwimmenService : SchwimmenService) : AbstractRe
         schwimmSpiel.passIndex = 0
 
     }
+
+    /**
+     * Hier wird überprüft, ob die Stapel schon leer ist oder nicht
+     * @return true, wenn den Stapel weniger als 3 Karten hat, false, wenn nicht
+     */
      fun stapelLeer() : Boolean
     {
         val schwimmSpiel = schwimmenService.schwimmSpiel
@@ -114,6 +143,12 @@ class SpielService(private val schwimmenService : SchwimmenService) : AbstractRe
         }
         return false
     }
+
+    /**
+     * Wird ein Array von Gewinner zurückgegeben, weil es den Fall sein Kann,
+     * dass mehr als einen Spieler die selbe Punkte hat
+     * @return Array von Type Spieler, die schon das maximal Punkte haben
+     */
     fun gewinnerListe() : ArrayDeque<Spieler>
     {
         val schwimmSpiel = schwimmenService.schwimmSpiel

@@ -2,6 +2,9 @@ package service
 import entity.*
 
 class SpielerAktionService(private val schwimmenService: SchwimmenService) : AbstractRefreshingService(){
+    /**
+     * Die Karten in der Mitte und die Karten, die den Spieler im Hand hat, werden getauscht
+     */
     fun alleKarteTauschen()
     {
         val schwimmSpiel = schwimmenService.schwimmSpiel
@@ -15,6 +18,12 @@ class SpielerAktionService(private val schwimmenService: SchwimmenService) : Abs
         aktullerSpieler.hand = schwimmSpiel.mitte
         schwimmSpiel.mitte = temp
     }
+
+    /**
+     * Eine ausgewählte Karte von Mitte und eine Karte von Hand der Spieler werden getauscht
+     * @param mittKarte die ausgewählte Karte von Mitte
+     * @param handKarte die ausgewählte Karte von Hand der Spieler
+     */
     fun einKarteTauschen(mittKarte: SchwimmKarte ,handKarte: SchwimmKarte)
     {
         val schwimmSpiel = schwimmenService.schwimmSpiel
@@ -43,6 +52,11 @@ class SpielerAktionService(private val schwimmenService: SchwimmenService) : Abs
         }
 
     }
+
+    /**
+     *  Wird den PassIndex erhört und überprüft,
+     *  ob schon jemanden geklopft hat, dann wird den KlopfIndex auch erhört
+     */
     fun pass()
     {
         val schwimmSpiel = schwimmenService.schwimmSpiel
@@ -55,6 +69,10 @@ class SpielerAktionService(private val schwimmenService: SchwimmenService) : Abs
         schwimmenService.spielService.naechsterSpieler()
 
     }
+
+    /**
+     * Wird den KlopfIndex erhört
+     */
     fun klopfen()
     {
         val schwimmSpiel = schwimmenService.schwimmSpiel

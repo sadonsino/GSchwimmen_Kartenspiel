@@ -17,9 +17,12 @@ class Schwimmen(val spieler: ArrayDeque<Spieler>)
      var aktuellerSpielerIndex:Int = 0
      var klopfIndexe :Int = 0
      var passIndex:Int = 0
-     val empty : Boolean get() = karten.isEmpty()
 
-   fun addAufOben(karten : List<SchwimmKarte>)
+    /**
+     * Die Funktion legt eine vorgegebene Kartenliste oben auf diesen Kartenstapel
+     * @param karten ist eine Liste von SchimmKarte
+     */
+   fun kartenHinzufügen(karten : List<SchwimmKarte>)
    {
       karten.forEach(this.karten::addFirst)
    }
