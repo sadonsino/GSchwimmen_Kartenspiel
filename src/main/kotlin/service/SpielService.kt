@@ -57,12 +57,16 @@ class SpielService(private val schwimmenService : SchwimmenService) : AbstractRe
             {
                 mitteErneuren()
             }
-            if(schwimmSpiel.aktuellerSpielerIndex==schwimmSpiel.spieler.size-1)
+        }
+        if (!beendeSpiel())
+        {
+            if (schwimmSpiel.aktuellerSpielerIndex == schwimmSpiel.spieler.size - 1)
             {
-                schwimmSpiel.aktuellerSpielerIndex = 0
+                    schwimmSpiel.aktuellerSpielerIndex = 0
             }
             else schwimmSpiel.aktuellerSpielerIndex++
         }
+
 
     }
 
