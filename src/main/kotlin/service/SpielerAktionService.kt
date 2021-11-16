@@ -80,7 +80,8 @@ class SpielerAktionService(private val schwimmenService: SchwimmenService) : Abs
     {
         val schwimmSpiel = schwimmenService.schwimmSpiel
         checkNotNull(schwimmSpiel)
-        schwimmSpiel.klopfIndexe++     // 4    1(3)    2   (4)    3(1)   4 (2)
+        schwimmenService.spielService.resetPassIndex()
+        schwimmSpiel.klopfIndexe++
         schwimmenService.spielService.naechsterSpieler()
     }
 }
