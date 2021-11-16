@@ -17,6 +17,8 @@ class SpielerAktionService(private val schwimmenService: SchwimmenService) : Abs
         val temp = aktullerSpieler.hand
         aktullerSpieler.hand = schwimmSpiel.mitte
         schwimmSpiel.mitte = temp
+        schwimmenService.spielService.naechsterSpieler()
+
     }
 
     /**
@@ -50,6 +52,7 @@ class SpielerAktionService(private val schwimmenService: SchwimmenService) : Abs
                 }
             }
         }
+        schwimmenService.spielService.naechsterSpieler()
 
     }
 
@@ -77,7 +80,7 @@ class SpielerAktionService(private val schwimmenService: SchwimmenService) : Abs
     {
         val schwimmSpiel = schwimmenService.schwimmSpiel
         checkNotNull(schwimmSpiel)
-        schwimmSpiel.klopfIndexe++
+        schwimmSpiel.klopfIndexe++     // 4    1(3)    2   (4)    3(1)   4 (2)
         schwimmenService.spielService.naechsterSpieler()
     }
 }

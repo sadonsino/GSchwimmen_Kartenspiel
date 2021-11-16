@@ -51,23 +51,18 @@ class SpielService(private val schwimmenService : SchwimmenService) : AbstractRe
     {
         val schwimmSpiel = schwimmenService.schwimmSpiel
         checkNotNull(schwimmSpiel)
-        if (!beendeSpiel())
+        if (!beendeSpiel() && schwimmSpiel.passIndex == schwimmSpiel.spieler.size )     // 4 Spieler = 0.1 0  0 _pass-> 1 1 -- pass 0 0
         {
-            if (schwimmSpiel.passIndex == schwimmSpiel.spieler.size)
-            {
                 mitteErneuren()
-            }
         }
         if (!beendeSpiel())
         {
             if (schwimmSpiel.aktuellerSpielerIndex == schwimmSpiel.spieler.size - 1)
             {
-                    schwimmSpiel.aktuellerSpielerIndex = 0
+                schwimmSpiel.aktuellerSpielerIndex = 0
             }
             else schwimmSpiel.aktuellerSpielerIndex++
         }
-
-
     }
 
     /**
