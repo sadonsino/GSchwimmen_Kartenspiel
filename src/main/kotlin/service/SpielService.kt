@@ -14,12 +14,11 @@ class SpielService(private val schwimmenService : SchwimmenService) : AbstractRe
     {
        val schwimmSpiel = schwimmenService.schwimmSpiel
         checkNotNull(schwimmSpiel)
-        val punkte : Double
+        var punkte  = 0.0
         val hand  = spieler.hand
         if (hand[0].wert==hand[1].wert && hand[1].wert ==hand[2].wert)
         {
                 punkte = 30.5
-                return punkte
         }
         var herzPunkte = 0.0
         var kreuzPunkte = 0.0
@@ -37,8 +36,8 @@ class SpielService(private val schwimmenService : SchwimmenService) : AbstractRe
             }
 
         }
-        punkte = maxOf(herzPunkte,karoPunkte,karoPunkte,pickPunkte)
-        return punkte
+
+        return maxOf(herzPunkte,karoPunkte,karoPunkte,pickPunkte,punkte)
     }
 
     /**
