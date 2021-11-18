@@ -42,12 +42,12 @@ class SchimmKarteTest {
      * Teste, ob die Methode, die richtige Wert ausgibt
      */
     @Test
-    fun karteWertTest()
+    fun getPunkteTest()
     {
-        assertEquals(achtPick.karteWert(),8)
-        assertEquals(aceHerz.karteWert(),11)
-        assertEquals(neuenKaro.karteWert(),9)
-        assertEquals(zehnKreuz.karteWert(),10)
+        assertEquals(achtPick.getPunkte(),8.0)
+        assertEquals(aceHerz.getPunkte(),11.0)
+        assertEquals(neuenKaro.getPunkte(),9.0)
+        assertEquals(zehnKreuz.getPunkte(),10.0)
     }
     /**
      * Teste, ob die Karten mit gleichen Wert und Farbe gleich sind

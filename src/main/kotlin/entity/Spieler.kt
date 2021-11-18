@@ -34,10 +34,10 @@ class Spieler( val spielerName : String ) {
         {
             when (karte.farbe)
             {
-                CardSuit.SPADES -> pickPunkte += karte.karteWert()
-                CardSuit.CLUBS -> kreuzPunkte += karte.karteWert()
-                CardSuit.HEARTS -> herzPunkte += karte.karteWert()
-                CardSuit.DIAMONDS -> karoPunkte += karte.karteWert()
+                CardSuit.SPADES -> pickPunkte += karte.getPunkte()
+                CardSuit.CLUBS -> kreuzPunkte += karte.getPunkte()
+                CardSuit.HEARTS -> herzPunkte += karte.getPunkte()
+                CardSuit.DIAMONDS -> karoPunkte += karte.getPunkte()
             }
         }
 

@@ -8,16 +8,16 @@ data class SchwimmKarte(val farbe : CardSuit, val wert : CardValue) {
     /**
      *gibt den Card int-Wert jeder Karte zurück -> K,Q,J(10 Punkte) ,A (11 Punkte),  7,8,9,10 (7,8,9,10 Punkte)
      */
-    fun karteWert() : Int
+    fun getPunkte() : Double
     {
         return try
         {
-            wert.toString().toInt()
+            wert.toString().toDouble()
         }
         catch (e: NumberFormatException)
         {
-            if (wert.toString() == "A") 11
-            else 10
+            if (wert.toString() == "A") 11.0
+            else 10.0
         }
     }
     override fun toString() : String = "${farbe.toString()}${wert.toString()}"

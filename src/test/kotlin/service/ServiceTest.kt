@@ -4,7 +4,19 @@ import entity.*
 import org.junit.jupiter.api.Test
 import view.Refreshable
 
+/**
+ * Klasse, die Tests für [SpielService] und [SpielerAktionService] bereitstellt.
+ * * [TestRefreshable] wird verwendet, um das korrekte Aktualisierungsverhalten zu überprüfen.
+ */
 class ServiceTest {
+    /**
+     * Es wird das Spiel mit 3 Spieler gestartet.
+     *
+     * @param refreshable aktualisierbare Elemente, die dem SchwimmenService direkt nach seiner Instanziierung
+     * hinzugefügt werden sollen.
+     * @return SchwimmenService, der das gestartete Spiel als [SchwimmenService.schwimmSpiel] enthält.
+     */
+
     private fun spielErstellung(vararg refreshable: Refreshable): SchwimmenService {
         val mc = SchwimmenService()
         refreshable.forEach { mc.addRefreshable(it) }
@@ -15,14 +27,25 @@ class ServiceTest {
         mc.spielService.spielStarten(spieler)
         return  mc
     }
+
+    /**
+     * Teste, ob das Spiel schon mit drei Spieler gestartet wird.
+     * */
     @Test
     fun spielStartenTest()
     {
         val testRefreshable = TestRefreshable()
         val mc = spielErstellung(testRefreshable)
         assertNotNull(mc.schwimmSpiel)
+        assertEquals(mc.schwimmSpiel!!.spieler.size,3)
+        assertNotEquals(mc.schwimmSpiel!!.spieler.size,4)
+        assertNotEquals(mc.schwimmSpiel!!.spieler.size,2)
     }
 
+    /**
+     * Teste, ob die aktuellerSpielerIndex erhört wird, wenn die Methode
+     * [SpielService.naechsterSpieler] aufgerufen wird.
+     */
     @Test
     fun naechsterSpielerTest()
     {
@@ -37,6 +60,11 @@ class ServiceTest {
         assertEquals(mc.schwimmSpiel!!.aktuellerSpielerIndex,0)
 
     }
+
+    /**
+     * Teste, ob das Spiel beenden muss, wenn eine geklopft hat oder
+     * die Stapel kleiner 3 ist und den PassIndex gleich die Anzahl der Spieler.
+     */
     @Test
     fun beendeSpielTest()
     {
@@ -58,6 +86,11 @@ class ServiceTest {
         assertEquals(mc.spielService.beendeSpiel(),true)
 
     }
+
+    /**
+     * Teste, ob den PassIndex auf 0 gesetzt wird und die mitteKarten getauscht wird,
+     * wenn [SpielService.mitteErneuren] aufgerufen wird.
+     */
     @Test
     fun mitteErneurenTest()
     {
@@ -79,8 +112,11 @@ class ServiceTest {
         assertNotSame(altPassIndex,mc.schwimmSpiel!!.passIndex)
         assertEquals(mc.schwimmSpiel!!.passIndex,0)
     }
-    @Test
 
+    /**
+     * Teste, ob alle Karte der Spieler mit der Karten von Mitte getauscht wird.
+     */
+    @Test
     fun alleKarteTauschenTest()
     {
         val testRefreshable = TestRefreshable()
@@ -95,6 +131,9 @@ class ServiceTest {
 
     }
 
+    /**
+     * Teste, ob die ausgewählten Karten getaucht wird.
+     */
     @Test
     fun einKarteTauschen()
     {
@@ -108,6 +147,12 @@ class ServiceTest {
         assertEquals(mc.schwimmSpiel!!.spieler[0].hand[0],karteMitte)
         assertEquals(mc.schwimmSpiel!!.mitte[0],karteSpiler)
     }
+
+    /**
+     * Teste, ob den PassIndex erhört wird, wenn ein Spieler gepasst hat.
+     * und den PassIndex auf 0 ist, wenn alle Spieler gepasst haben und eine
+     * andere Aktion ausgewählt haben.
+     */
     @Test
     fun passenTest()
     {
@@ -121,7 +166,21 @@ class ServiceTest {
         mc.spielerAktionService.pass()
         assertEquals(mc.schwimmSpiel!!.passIndex,0)
         assertNotEquals(mc.schwimmSpiel!!.passIndex,1)
+        mc.spielerAktionService.pass()
+        assertEquals(mc.schwimmSpiel!!.passIndex,1)
+        mc.spielerAktionService.alleKarteTauschen()
+        assertEquals(mc.schwimmSpiel!!.passIndex,0)
+        mc.spielerAktionService.klopfen()
+        assertEquals(mc.schwimmSpiel!!.passIndex,0)
+        mc.spielerAktionService.einKarteTauschen(mc.schwimmSpiel!!.mitte[0],mc.schwimmSpiel!!.spieler[0].hand[0])
+        assertEquals(mc.schwimmSpiel!!.passIndex,0)
     }
+
+    /**
+     * Teste, ob wenn ein Spieler geklopft hat, dann sind alle
+     * anderen Spieler noch genau einmal an der Reihe.
+     * Danach ist das Spiel beendet.
+     */
     @Test
     fun klopfenTest()
     {

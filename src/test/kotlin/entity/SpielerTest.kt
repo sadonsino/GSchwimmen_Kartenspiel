@@ -41,6 +41,10 @@ class SpielerTest {
         assertNotSame(spieler1.spielerName, spieler3.spielerName)
         assertEquals(spieler3.spielerName, spieler2.spielerName)
     }
+
+    /**
+     * Teste, ob die Summe der Punkte eines Spielers errechnet wird
+     */
     @Test
     fun summePunkteTest ()
     {
