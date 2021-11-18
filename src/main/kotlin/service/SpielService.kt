@@ -51,42 +51,6 @@ class SpielService(private val schwimmenService : SchwimmenService) : AbstractRe
 
 
     /**
-     * Hier wird die Werte der Karten berechnet und
-     * die maximal Punkte von der Karten bezüglich der Logik des Spiels zurückgegeben
-     * @param spieler ist der Spieler, der seine Karten berechnet wird
-     * @return maximale Punkte, was er erreichen kann
-     */
-    fun summePunkte (spieler: Spieler) : Double
-    {
-       val schwimmSpiel = schwimmenService.schwimmSpiel
-        checkNotNull(schwimmSpiel)
-        var punkte  = 0.0
-        val hand  = spieler.hand
-        if (hand[0].wert==hand[1].wert && hand[1].wert ==hand[2].wert)
-        {
-                punkte = 30.5
-        }
-        var herzPunkte = 0.0
-        var kreuzPunkte = 0.0
-        var karoPunkte = 0.0
-        var pickPunkte = 0.0
-
-        for(karte in hand)
-        {
-            when (karte.farbe)
-            {
-                CardSuit.SPADES -> pickPunkte += karte.karteWert()
-                CardSuit.CLUBS -> kreuzPunkte += karte.karteWert()
-                CardSuit.HEARTS -> herzPunkte += karte.karteWert()
-                CardSuit.DIAMONDS -> karoPunkte += karte.karteWert()
-            }
-
-        }
-
-        return maxOf(herzPunkte,karoPunkte,karoPunkte,pickPunkte,punkte)
-    }
-
-    /**
      * Es wird den aktuellerSpielerIndex erhört und zwei Fälle betrachtet:
      * 1. Wenn den passIndex ist gleich spieler.size, dann muss die Funktion [mitteErneuren()] aufgerufen
      * 2. Wenn aktuellerSpielerIndex ist gleich spieler.size-1, dann muss aktuellerSpielerIndex
