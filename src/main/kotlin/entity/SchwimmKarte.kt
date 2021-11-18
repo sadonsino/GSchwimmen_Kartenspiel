@@ -20,6 +20,5 @@ data class SchwimmKarte(val farbe : CardSuit, val wert : CardValue) {
             else 10
         }
     }
-    // Gibt die Farbe und den Wert als String zurück
     override fun toString() : String = "${farbe.toString()}${wert.toString()}"
 }

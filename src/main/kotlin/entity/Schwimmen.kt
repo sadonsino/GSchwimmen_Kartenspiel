@@ -4,7 +4,7 @@ package entity
  * @param spieler enthält alle Spieler
  */
 
-class Schwimmen(val spieler: ArrayDeque<Spieler>)
+class Schwimmen(val spieler: ArrayDeque<Spieler>, val karten:ArrayDeque<SchwimmKarte> )
 {
     /**
      *  aktuellerSpieler ist den Index, der des aktuellen Spielers
@@ -12,7 +12,6 @@ class Schwimmen(val spieler: ArrayDeque<Spieler>)
      *  passIndex ist den Index, der schon zählt, wie viel mal gepasst wurde
      *  mitte enthält die Karte, die in der Mitte von Spielfeld steht
      */
-     val karten: ArrayDeque<SchwimmKarte> = ArrayDeque(32)
      var mitte : ArrayDeque<SchwimmKarte> = ArrayDeque(3)
      var aktuellerSpielerIndex:Int = 0
      var klopfIndexe :Int = 0
@@ -20,10 +19,10 @@ class Schwimmen(val spieler: ArrayDeque<Spieler>)
 
     /**
      * Die Funktion legt eine vorgegebene Kartenliste oben auf diesen Kartenstapel
-     * @param karten ist eine Liste von SchimmKarte
+     * @param karte ist eine Liste von SchimmKarte
      */
-   fun kartenHinzufügen(karten : List<SchwimmKarte>)
+   fun kartenHinzufuegen(karte : List<SchwimmKarte>)
    {
-      karten.forEach(this.karten::addFirst)
+      karte.forEach(this.karten::addFirst)
    }
 }

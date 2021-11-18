@@ -4,6 +4,52 @@ import entity.*
 
 class SpielService(private val schwimmenService : SchwimmenService) : AbstractRefreshingService()
 {
+
+
+
+    /**
+     * Start ein neues Spiel
+     * @param spielerArray ist ein Feld von Typ Spieler
+     */
+
+    fun spielStarten (spielerArray: ArrayDeque<Spieler>)
+    {
+       val karten : ArrayDeque<SchwimmKarte> = ArrayDeque(32)
+        val schwimmSpiel1 = Schwimmen(spielerArray,karten)
+        schwimmSpiel1.kartenHinzufuegen(defaultRandomCardList())
+
+        for (p in 0 until  schwimmSpiel1.spieler.size)
+        {
+            for (h in 0 until 3)
+            {
+                schwimmSpiel1.spieler[p].hand.add(schwimmSpiel1.karten[0])
+                schwimmSpiel1.karten.removeFirst()
+            }
+        }
+        for (m in 0 until 3)
+        {
+            schwimmSpiel1.mitte.add(schwimmSpiel1.karten[0])
+            schwimmSpiel1.karten.removeFirst()
+
+        }
+        schwimmenService.schwimmSpiel = schwimmSpiel1
+
+    }
+
+    /**
+     * Erstellt eine gemischte 32-Karten-Liste aller vier Farben und Karten
+     * von 7 bis Ass
+     * @return eine Liste, die 32 Objekt von SchwimmKarte enthält
+     */
+    private fun defaultRandomCardList() = List(32)
+    { index ->
+        SchwimmKarte(
+            CardSuit.values()[index / 8],
+            CardValue.values()[(index % 8) + 5]  //
+        )
+    }.shuffled()
+
+
     /**
      * Hier wird die Werte der Karten berechnet und
      * die maximal Punkte von der Karten bezüglich der Logik des Spiels zurückgegeben
@@ -50,18 +96,12 @@ class SpielService(private val schwimmenService : SchwimmenService) : AbstractRe
     {
         val schwimmSpiel = schwimmenService.schwimmSpiel
         checkNotNull(schwimmSpiel)
-        if (!beendeSpiel() && schwimmSpiel.passIndex == schwimmSpiel.spieler.size )     // 4 Spieler = 0.1 0  0 _pass-> 1 1 -- pass 0 0
-        {
-                mitteErneuren()
-        }
-        if (!beendeSpiel())
-        {
-            if (schwimmSpiel.aktuellerSpielerIndex == schwimmSpiel.spieler.size - 1)
+            if (!beendeSpiel()&&schwimmSpiel.aktuellerSpielerIndex == schwimmSpiel.spieler.size - 1)
             {
                 schwimmSpiel.aktuellerSpielerIndex = 0
             }
             else schwimmSpiel.aktuellerSpielerIndex++
-        }
+
     }
 
     /**
@@ -72,15 +112,11 @@ class SpielService(private val schwimmenService : SchwimmenService) : AbstractRe
     {
         val schwimmSpiel = schwimmenService.schwimmSpiel
         checkNotNull(schwimmSpiel)
-       if (stapelLeer()&&schwimmSpiel.passIndex==schwimmSpiel.spieler.size)
+       if (schwimmSpiel.karten.size<3&&schwimmSpiel.passIndex==schwimmSpiel.spieler.size)
        {
            return true
        }
-       else if (schwimmSpiel.klopfIndexe==schwimmSpiel.spieler.size  )
-       {
-            return true
-       }
-        return false
+       else return schwimmSpiel.klopfIndexe==schwimmSpiel.spieler.size
     }
 
     /**
@@ -90,80 +126,27 @@ class SpielService(private val schwimmenService : SchwimmenService) : AbstractRe
     {
         val schwimmSpiel = schwimmenService.schwimmSpiel
         checkNotNull(schwimmSpiel)
-        if (stapelLeer())
+        if (schwimmSpiel.karten.size<3)
         {
             beendeSpiel()
         }
         else
         {
-            for (kart in schwimmSpiel.mitte)
+            for (kart in 0 until  3)
             {
                 schwimmSpiel.mitte.removeFirst()
             }
 
-            for (kart in schwimmSpiel.mitte)
+            for (kart in 0 until  3)
             {
                 schwimmSpiel.mitte.addFirst(schwimmSpiel.karten.removeFirst())
             }
-            resetPassIndex()
+
+            schwimmSpiel.passIndex=0
 
         }
 
     }
 
-    /**
-     * Hier wird den PassIndex auf 0 gesetzt
-     */
-    fun resetPassIndex()
-    {
-        val schwimmSpiel = schwimmenService.schwimmSpiel
-        checkNotNull(schwimmSpiel)
-        schwimmSpiel.passIndex = 0
-
-    }
-
-    /**
-     * Hier wird überprüft, ob die Stapel schon leer ist oder nicht
-     * @return true, wenn den Stapel weniger als 3 Karten hat, false, wenn nicht
-     */
-     fun stapelLeer() : Boolean
-    {
-        val schwimmSpiel = schwimmenService.schwimmSpiel
-        checkNotNull(schwimmSpiel)
-        if (schwimmSpiel.karten.size<3)
-        {
-            return true
-        }
-        return false
-    }
-
-    /**
-     * Wird ein Array von Gewinner zurückgegeben, weil es den Fall sein Kann,
-     * dass mehr als einen Spieler die selbe Punkte hat
-     * @return Array von Type Spieler, die schon das maximal Punkte haben
-     */
-    fun gewinnerListe() : ArrayDeque<Spieler>
-    {
-        val schwimmSpiel = schwimmenService.schwimmSpiel
-        checkNotNull(schwimmSpiel){"No game currently running."}
-
-        var max = summePunkte(schwimmSpiel.spieler.first())
-        var indexOfMax=0
-        val gewinnerArray : ArrayDeque<Spieler> = ArrayDeque()
-
-        for(i in 1 until schwimmSpiel.spieler.size){
-            if(summePunkte(schwimmSpiel.spieler[i])>max){
-                max=summePunkte(schwimmSpiel.spieler[i])
-                indexOfMax=i
-            }
-        }
-        gewinnerArray.add(schwimmSpiel.spieler[indexOfMax])
-        for(i in 0 until schwimmSpiel.spieler.size){
-            if(summePunkte(schwimmSpiel.spieler[i])==max && i!=indexOfMax){
-                gewinnerArray.add(schwimmSpiel.spieler[i])
-            }
-        }
-        return gewinnerArray
-    }
 
     }

@@ -16,7 +16,11 @@ class SpielerTest {
     fun inHandHinzufuegen()
     {
         spieler1.hand.add(SchwimmKarte(CardSuit.HEARTS,CardValue.SEVEN))
+        spieler1.hand.add(SchwimmKarte(CardSuit.DIAMONDS,CardValue.SEVEN))
         spieler1.hand.add(SchwimmKarte(CardSuit.SPADES,CardValue.SEVEN))
+        spieler2.hand.add(SchwimmKarte(CardSuit.SPADES,CardValue.NINE))
+        spieler2.hand.add(SchwimmKarte(CardSuit.SPADES,CardValue.ACE))
+        spieler2.hand.add(SchwimmKarte(CardSuit.SPADES,CardValue.JACK))
     }
 
     /**
@@ -36,5 +40,12 @@ class SpielerTest {
     {
         assertNotSame(spieler1.spielerName, spieler3.spielerName)
         assertEquals(spieler3.spielerName, spieler2.spielerName)
+    }
+    @Test
+    fun summePunkteTest ()
+    {
+        assertEquals(spieler1.summePunkte(),30.5)
+        assertEquals(spieler2.summePunkte(),30.0)
+
     }
 }

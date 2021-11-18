@@ -9,6 +9,7 @@ class SpielerAktionService(private val schwimmenService: SchwimmenService) : Abs
     {
         val schwimmSpiel = schwimmenService.schwimmSpiel
         checkNotNull(schwimmSpiel)
+        schwimmSpiel.passIndex = 0
         if (schwimmSpiel.klopfIndexe>0)
         {
             schwimmSpiel.klopfIndexe++
@@ -30,28 +31,28 @@ class SpielerAktionService(private val schwimmenService: SchwimmenService) : Abs
     {
         val schwimmSpiel = schwimmenService.schwimmSpiel
         checkNotNull(schwimmSpiel)
+        schwimmSpiel.passIndex = 0
         val aktullerSpieler = schwimmSpiel.spieler[schwimmSpiel.aktuellerSpielerIndex]
         if (schwimmSpiel.klopfIndexe>0)
         {
             schwimmSpiel.klopfIndexe++
         }
-        for (k in schwimmSpiel.mitte)
+        var handPosition = -1
+        var mittePosition = -1
+        for (k in 0 until  schwimmSpiel.mitte.size)
         {
-            if (k==mittKarte)
+            if (schwimmSpiel.mitte[k]==mittKarte)
             {
-                for (h in aktullerSpieler.hand)
-                {
-                    if (h==handKarte)
-                    {
-                        val temp = k
-                        schwimmSpiel.mitte.remove(k)
-                        schwimmSpiel.mitte.addFirst(h)
-                        aktullerSpieler.hand.remove(h)
-                        aktullerSpieler.hand.add(temp)
-                    }
-                }
+                mittePosition = k
             }
+            if (aktullerSpieler.hand[k]==handKarte)
+            {
+                handPosition = k
+            }
+
         }
+        schwimmSpiel.mitte.set(mittePosition,handKarte)
+        aktullerSpieler.hand.set(handPosition,mittKarte)
         schwimmenService.spielService.naechsterSpieler()
 
     }
@@ -64,11 +65,15 @@ class SpielerAktionService(private val schwimmenService: SchwimmenService) : Abs
     {
         val schwimmSpiel = schwimmenService.schwimmSpiel
         checkNotNull(schwimmSpiel)
+        schwimmSpiel.passIndex++
         if (schwimmSpiel.klopfIndexe>0)
         {
             schwimmSpiel.klopfIndexe++
         }
-        schwimmSpiel.passIndex++
+        if (!schwimmenService.spielService.beendeSpiel()&&schwimmSpiel.passIndex == schwimmSpiel.spieler.size )
+        {
+            schwimmenService.spielService.mitteErneuren()
+        }
         schwimmenService.spielService.naechsterSpieler()
 
     }
@@ -80,7 +85,7 @@ class SpielerAktionService(private val schwimmenService: SchwimmenService) : Abs
     {
         val schwimmSpiel = schwimmenService.schwimmSpiel
         checkNotNull(schwimmSpiel)
-        schwimmenService.spielService.resetPassIndex()
+        schwimmSpiel.passIndex = 0
         schwimmSpiel.klopfIndexe++
         schwimmenService.spielService.naechsterSpieler()
     }

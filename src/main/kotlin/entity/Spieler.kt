@@ -13,4 +13,34 @@ class Spieler( val spielerName : String ) {
     {
         return "$spielerName hat diesen Karten: ${hand.toString()}"
     }
+    /**
+     * Hier wird die Werte der Karten berechnet und
+     * die maximal Punkte von der Karten bezüglich der Logik des Spiels zurückgegeben
+     * @return maximale Punkte, was er erreichen kann
+     */
+    fun summePunkte () : Double
+    {
+        var punkte  = 0.0
+        if (hand[0].wert==hand[1].wert && hand[1].wert ==hand[2].wert)
+        {
+            punkte = 30.5
+        }
+        var herzPunkte = 0.0
+        var kreuzPunkte = 0.0
+        var karoPunkte = 0.0
+        var pickPunkte = 0.0
+
+        for(karte in hand)
+        {
+            when (karte.farbe)
+            {
+                CardSuit.SPADES -> pickPunkte += karte.karteWert()
+                CardSuit.CLUBS -> kreuzPunkte += karte.karteWert()
+                CardSuit.HEARTS -> herzPunkte += karte.karteWert()
+                CardSuit.DIAMONDS -> karoPunkte += karte.karteWert()
+            }
+        }
+
+        return maxOf(herzPunkte,karoPunkte,karoPunkte,pickPunkte,punkte)
+    }
 }
