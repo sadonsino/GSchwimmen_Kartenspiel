@@ -1,8 +1,6 @@
 package service
 import  kotlin.test.*
-import entity.CardSuit
 import entity.*
-import service.*
 import org.junit.jupiter.api.Test
 import view.Refreshable
 

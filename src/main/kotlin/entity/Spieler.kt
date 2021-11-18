@@ -7,11 +7,11 @@ class Spieler( val spielerName : String ) {
     /**
      *  hand: ist ein Array aus drei Karten, mit denen der Spieler spielen kann.
      */
-    var hand : ArrayDeque<SchwimmKarte> = ArrayDeque<SchwimmKarte>(3)
+    var hand : ArrayDeque<SchwimmKarte> = ArrayDeque(3)
     /* gibt die SpielerName und die drei Karten, die das er hat, zurück */
     override fun toString() : String
     {
-        return "$spielerName hat diesen Karten: ${hand.toString()}"
+        return "$spielerName hat diesen Karten: $hand"
     }
     /**
      * Hier wird die Werte der Karten berechnet und
