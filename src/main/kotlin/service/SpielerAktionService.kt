@@ -1,6 +1,11 @@
 package service
 import entity.*
 
+/**
+ * Klasse der SpielerAktionen verwaltet.
+ * @property schwimmenService [SchwimmenService] es wird der aktuelle SchwimmenService übergeben
+ */
+
 class SpielerAktionService(private val schwimmenService: SchwimmenService) : AbstractRefreshingService(){
     /**
      * Die Karten in der Mitte und die Karten, die den Spieler im Hand hat, werden getauscht
@@ -19,9 +24,10 @@ class SpielerAktionService(private val schwimmenService: SchwimmenService) : Abs
         aktullerSpieler.hand = schwimmSpiel.mitte
         schwimmSpiel.mitte = temp
         schwimmenService.spielService.naechsterSpieler()
+        onAllRefreshables { refreshNachKartenTauschenHand() }
+        onAllRefreshables { refreshNachKartenTauschenMitte() }
 
     }
-
     /**
      * Eine ausgewählte Karte von Mitte und eine Karte von Hand der Spieler werden getauscht
      * @param mittKarte die ausgewählte Karte von Mitte
@@ -51,12 +57,13 @@ class SpielerAktionService(private val schwimmenService: SchwimmenService) : Abs
             }
 
         }
-        schwimmSpiel.mitte.set(mittePosition,handKarte)
-        aktullerSpieler.hand.set(handPosition,mittKarte)
+        schwimmSpiel.mitte[mittePosition] = handKarte
+        aktullerSpieler.hand[handPosition] = mittKarte
         schwimmenService.spielService.naechsterSpieler()
+        onAllRefreshables { refreshNachKartenTauschenHand() }
+        onAllRefreshables { refreshNachKartenTauschenMitte() }
 
     }
-
     /**
      *  Wird den PassIndex erhört und überprüft,
      *  ob schon jemanden geklopft hat, dann wird den KlopfIndex auch erhört
@@ -75,9 +82,9 @@ class SpielerAktionService(private val schwimmenService: SchwimmenService) : Abs
             schwimmenService.spielService.mitteErneuren()
         }
         schwimmenService.spielService.naechsterSpieler()
+        onAllRefreshables { refreshNachPassen() }
 
     }
-
     /**
      * Wird den KlopfIndex erhört
      */
@@ -88,5 +95,6 @@ class SpielerAktionService(private val schwimmenService: SchwimmenService) : Abs
         schwimmSpiel.passIndex = 0
         schwimmSpiel.klopfIndexe++
         schwimmenService.spielService.naechsterSpieler()
+        onAllRefreshables { refreshNachKlopfen() }
     }
 }

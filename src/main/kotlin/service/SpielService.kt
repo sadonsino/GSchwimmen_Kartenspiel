@@ -2,11 +2,13 @@ package service
 
 import entity.*
 
+/**
+ * Klasse in der die Spielfunktionen gewährleistet werden.
+ * @property schwimmenService[SchwimmenService] aktueller schwimmenService wird übergeben
+ */
+
 class SpielService(private val schwimmenService : SchwimmenService) : AbstractRefreshingService()
 {
-
-
-
     /**
      * Start ein neues Spiel
      * @param spielerArray ist ein Feld von Typ Spieler
@@ -33,13 +35,13 @@ class SpielService(private val schwimmenService : SchwimmenService) : AbstractRe
 
         }
         schwimmenService.schwimmSpiel = schwimmSpiel1
-
+        onAllRefreshables { refreshNachSpielStarten() }
     }
 
     /**
      * Erstellt eine gemischte 32-Karten-Liste aller vier Farben und Karten
-     * von 7 bis Ass
-     * @return eine Liste, die 32 Objekt von SchwimmKarte enthält
+     * von 7 bis Ass.
+     * @return eine Liste, die 32 Objekt von SchwimmKarte enthält.
      */
     private fun defaultRandomCardList() = List(32)
     { index ->
@@ -49,12 +51,11 @@ class SpielService(private val schwimmenService : SchwimmenService) : AbstractRe
         )
     }.shuffled()
 
-
     /**
      * Es wird den aktuellerSpielerIndex erhört und zwei Fälle betrachtet:
      * 1. Wenn den passIndex ist gleich spieler.size, dann muss die Funktion [mitteErneuren()] aufgerufen
      * 2. Wenn aktuellerSpielerIndex ist gleich spieler.size-1, dann muss aktuellerSpielerIndex
-     * auf 0 gesetzt wird
+     * auf 0 gesetzt wird.
      */
     fun naechsterSpieler()
     {
@@ -67,24 +68,21 @@ class SpielService(private val schwimmenService : SchwimmenService) : AbstractRe
             else schwimmSpiel.aktuellerSpielerIndex++
 
     }
-
     /**
-     * Hier wird zurückgegeben, ob das Spiel beendet bezüglich der Logik des Spiels ist oder nicht
-     * @return true, wenn die Ende des Spiels ist oder false, wenn nicht
+     * Hier wird zurückgegeben, ob das Spiel beendet bezüglich der Logik des Spiels ist oder nicht.
+     * @return true, wenn die Ende des Spiels ist oder false, wenn nicht.
      */
     fun beendeSpiel(): Boolean
     {
         val schwimmSpiel = schwimmenService.schwimmSpiel
         checkNotNull(schwimmSpiel)
-       if (schwimmSpiel.karten.size<3&&schwimmSpiel.passIndex==schwimmSpiel.spieler.size)
-       {
-           return true
-       }
-       else return schwimmSpiel.klopfIndexe==schwimmSpiel.spieler.size
+        return if (schwimmSpiel.karten.size<3&&schwimmSpiel.passIndex==schwimmSpiel.spieler.size) {
+            true
+        } else schwimmSpiel.klopfIndexe==schwimmSpiel.spieler.size
     }
 
     /**
-     * Hier wird die Karten von Mitte und entfernt und drei neue Karten von stapel hinzufügt
+     * Hier wird die Karten von Mitte und entfernt und drei neue Karten von stapel hinzufügt.
      */
     fun mitteErneuren()
     {
@@ -111,6 +109,4 @@ class SpielService(private val schwimmenService : SchwimmenService) : AbstractRe
         }
 
     }
-
-
-    }
+}
