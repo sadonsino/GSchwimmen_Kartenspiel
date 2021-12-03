@@ -270,7 +270,8 @@ class SpielTischSzene (private val schwimmenService: SchwimmenService): BoardGam
         val schimmenSpiel = schwimmenService.schwimmSpiel
         checkNotNull(schimmenSpiel)
         val aktullerSpieler = schimmenSpiel.aktuellerSpielerIndex
-        schwimmenService.spielerAktionService.einKarteTauschen(schimmenSpiel.mitte[ausgewaelteKarteMitte],schimmenSpiel.spieler[aktullerSpieler].hand[ausgewaelteKarteHand])
+        schwimmenService.spielerAktionService.einKarteTauschen(
+            schimmenSpiel.mitte[ausgewaelteKarteMitte],schimmenSpiel.spieler[aktullerSpieler].hand[ausgewaelteKarteHand])
 
 
 

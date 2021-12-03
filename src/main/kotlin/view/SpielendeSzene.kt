@@ -158,17 +158,25 @@ class SpielendeSzene (private val schwimmenService: SchwimmenService):BoardGameS
     override fun refreshNachSpielende() {
         val cardImageLoader = CardImageLoader()
        val schwimmenSpiel = schwimmenService.schwimmSpiel
-        s1Kart1.frontVisual = ImageVisual(cardImageLoader.frontImageFor(schwimmenSpiel!!.spieler[0].hand[0].farbe,schwimmenSpiel.spieler[0].hand[0].wert))
-        s1Kart2.frontVisual = ImageVisual(cardImageLoader.frontImageFor(schwimmenSpiel.spieler[0].hand[1].farbe,schwimmenSpiel.spieler[0].hand[1].wert))
-        s1Kart3.frontVisual = ImageVisual(cardImageLoader.frontImageFor(schwimmenSpiel.spieler[0].hand[2].farbe,schwimmenSpiel.spieler[0].hand[2].wert))
-        s1punkt.text = "Spieler 1: "+schwimmenSpiel.spieler[0].spielerName+" Punkte: "+schwimmenSpiel.spieler[0].summePunkte().toString()
+        s1Kart1.frontVisual = ImageVisual(cardImageLoader.frontImageFor(
+            schwimmenSpiel!!.spieler[0].hand[0].farbe,schwimmenSpiel.spieler[0].hand[0].wert))
+        s1Kart2.frontVisual = ImageVisual(cardImageLoader.frontImageFor(
+            schwimmenSpiel.spieler[0].hand[1].farbe,schwimmenSpiel.spieler[0].hand[1].wert))
+        s1Kart3.frontVisual = ImageVisual(cardImageLoader.frontImageFor(
+            schwimmenSpiel.spieler[0].hand[2].farbe,schwimmenSpiel.spieler[0].hand[2].wert))
+        s1punkt.text = "Spieler 1: "+schwimmenSpiel.spieler[0].spielerName
+        s1punkt.text += " Punkte: "+schwimmenSpiel.spieler[0].summePunkte().toString()
         s1Kart1.showFront()
         s1Kart2.showFront()
         s1Kart3.showFront()
-        s2Kart1.frontVisual = ImageVisual(cardImageLoader.frontImageFor(schwimmenSpiel.spieler[1].hand[0].farbe,schwimmenSpiel.spieler[1].hand[0].wert))
-        s2Kart2.frontVisual = ImageVisual(cardImageLoader.frontImageFor(schwimmenSpiel.spieler[1].hand[1].farbe,schwimmenSpiel.spieler[1].hand[1].wert))
-        s2Kart3.frontVisual = ImageVisual(cardImageLoader.frontImageFor(schwimmenSpiel.spieler[1].hand[2].farbe,schwimmenSpiel.spieler[1].hand[2].wert))
-        s2punkt.text = "Spieler 2: "+schwimmenSpiel.spieler[1].spielerName+" Punkte: "+schwimmenSpiel.spieler[1].summePunkte().toString()
+        s2Kart1.frontVisual = ImageVisual(cardImageLoader.frontImageFor(
+            schwimmenSpiel.spieler[1].hand[0].farbe,schwimmenSpiel.spieler[1].hand[0].wert))
+        s2Kart2.frontVisual = ImageVisual(cardImageLoader.frontImageFor(
+            schwimmenSpiel.spieler[1].hand[1].farbe,schwimmenSpiel.spieler[1].hand[1].wert))
+        s2Kart3.frontVisual = ImageVisual(cardImageLoader.frontImageFor(
+            schwimmenSpiel.spieler[1].hand[2].farbe,schwimmenSpiel.spieler[1].hand[2].wert))
+        s2punkt.text = "Spieler 2: "+schwimmenSpiel.spieler[1].spielerName
+        s2punkt.text +=" Punkte: "+schwimmenSpiel.spieler[1].summePunkte().toString()
         s2Kart1.showFront()
         s2Kart2.showFront()
         s2Kart3.showFront()
@@ -178,10 +186,14 @@ class SpielendeSzene (private val schwimmenService: SchwimmenService):BoardGameS
             s3Kart1.isVisible = true
             s3Kart2.isVisible = true
             s3Kart3.isVisible = true
-            s3Kart1.frontVisual = ImageVisual(cardImageLoader.frontImageFor(schwimmenSpiel.spieler[2].hand[0].farbe,schwimmenSpiel.spieler[2].hand[0].wert))
-            s3Kart2.frontVisual = ImageVisual(cardImageLoader.frontImageFor(schwimmenSpiel.spieler[2].hand[1].farbe,schwimmenSpiel.spieler[2].hand[1].wert))
-            s3Kart3.frontVisual = ImageVisual(cardImageLoader.frontImageFor(schwimmenSpiel.spieler[2].hand[2].farbe,schwimmenSpiel.spieler[2].hand[2].wert))
-            s3punkt.text = "Spieler 3: "+schwimmenSpiel.spieler[2].spielerName+" Punkte: "+schwimmenSpiel.spieler[2].summePunkte().toString()
+            s3Kart1.frontVisual = ImageVisual(cardImageLoader.frontImageFor(
+                schwimmenSpiel.spieler[2].hand[0].farbe,schwimmenSpiel.spieler[2].hand[0].wert))
+            s3Kart2.frontVisual = ImageVisual(cardImageLoader.frontImageFor(
+                schwimmenSpiel.spieler[2].hand[1].farbe,schwimmenSpiel.spieler[2].hand[1].wert))
+            s3Kart3.frontVisual = ImageVisual(cardImageLoader.frontImageFor(
+                schwimmenSpiel.spieler[2].hand[2].farbe,schwimmenSpiel.spieler[2].hand[2].wert))
+            s3punkt.text = "Spieler 3: "+schwimmenSpiel.spieler[2].spielerName
+            s3punkt.text +=" Punkte: "+schwimmenSpiel.spieler[2].summePunkte().toString()
             s3Kart1.showFront()
             s3Kart2.showFront()
             s3Kart3.showFront()
@@ -193,10 +205,14 @@ class SpielendeSzene (private val schwimmenService: SchwimmenService):BoardGameS
             s4Kart1.isVisible = true
             s4Kart2.isVisible = true
             s4Kart3.isVisible = true
-            s4Kart1.frontVisual = ImageVisual(cardImageLoader.frontImageFor(schwimmenSpiel.spieler[3].hand[0].farbe,schwimmenSpiel.spieler[3].hand[0].wert))
-            s4Kart2.frontVisual = ImageVisual(cardImageLoader.frontImageFor(schwimmenSpiel.spieler[3].hand[1].farbe,schwimmenSpiel.spieler[3].hand[1].wert))
-            s4Kart3.frontVisual = ImageVisual(cardImageLoader.frontImageFor(schwimmenSpiel.spieler[3].hand[2].farbe,schwimmenSpiel.spieler[3].hand[2].wert))
-            s4punkt.text = "Spieler 4: "+schwimmenSpiel.spieler[3].spielerName+" Punkte: "+schwimmenSpiel.spieler[3].summePunkte().toString()
+            s4Kart1.frontVisual = ImageVisual(cardImageLoader.frontImageFor(
+                schwimmenSpiel.spieler[3].hand[0].farbe,schwimmenSpiel.spieler[3].hand[0].wert))
+            s4Kart2.frontVisual = ImageVisual(cardImageLoader.frontImageFor(
+                schwimmenSpiel.spieler[3].hand[1].farbe,schwimmenSpiel.spieler[3].hand[1].wert))
+            s4Kart3.frontVisual = ImageVisual(cardImageLoader.frontImageFor(
+                schwimmenSpiel.spieler[3].hand[2].farbe,schwimmenSpiel.spieler[3].hand[2].wert))
+            s4punkt.text = "Spieler 4: "+schwimmenSpiel.spieler[3].spielerName
+            s4punkt.text +=" Punkte: "+schwimmenSpiel.spieler[3].summePunkte().toString()
             s4Kart1.showFront()
             s4Kart2.showFront()
             s4Kart3.showFront()
