@@ -20,27 +20,29 @@ class Spieler( val spielerName : String ) {
      */
     fun summePunkte () : Double
     {
-        var punkte  = 0.0
+        val punkte: Double
         if (hand[0].wert==hand[1].wert && hand[1].wert ==hand[2].wert)
         {
             punkte = 30.5
+            return punkte
         }
-        var herzPunkte = 0.0
-        var kreuzPunkte = 0.0
-        var karoPunkte = 0.0
-        var pickPunkte = 0.0
+        else {
+            var herzPunkte = 0.0
+            var kreuzPunkte = 0.0
+            var karoPunkte = 0.0
+            var pickPunkte = 0.0
 
-        for(karte in hand)
-        {
-            when (karte.farbe)
-            {
-                CardSuit.SPADES -> pickPunkte += karte.getPunkte()
-                CardSuit.CLUBS -> kreuzPunkte += karte.getPunkte()
-                CardSuit.HEARTS -> herzPunkte += karte.getPunkte()
-                CardSuit.DIAMONDS -> karoPunkte += karte.getPunkte()
+            for (karte in hand) {
+                when (karte.farbe) {
+                    CardSuit.SPADES -> pickPunkte += karte.getPunkte()
+                    CardSuit.CLUBS -> kreuzPunkte += karte.getPunkte()
+                    CardSuit.HEARTS -> herzPunkte += karte.getPunkte()
+                    CardSuit.DIAMONDS -> karoPunkte += karte.getPunkte()
+                }
             }
+            return maxOf(herzPunkte,kreuzPunkte,karoPunkte,pickPunkte)
         }
 
-        return maxOf(herzPunkte,karoPunkte,karoPunkte,pickPunkte,punkte)
+
     }
 }

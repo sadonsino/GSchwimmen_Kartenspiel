@@ -20,10 +20,10 @@ class ServiceTest {
     private fun spielErstellung(vararg refreshable: Refreshable): SchwimmenService {
         val mc = SchwimmenService()
         refreshable.forEach { mc.addRefreshable(it) }
-        val spieler : ArrayDeque<Spieler> = ArrayDeque(4)
-        spieler.add(Spieler("Sadoun"))
-        spieler.add(Spieler("Max"))
-        spieler.add(Spieler("Alsinou"))
+        val spieler : ArrayDeque<String> = ArrayDeque(4)
+        spieler.add("Sadoun")
+        spieler.add("Max")
+        spieler.add("Alsinou")
         mc.spielService.spielStarten(spieler)
         return  mc
     }
@@ -39,6 +39,7 @@ class ServiceTest {
         assertEquals(mc.schwimmSpiel!!.spieler.size,3)
         assertNotEquals(mc.schwimmSpiel!!.spieler.size,4)
         assertNotEquals(mc.schwimmSpiel!!.spieler.size,2)
+        assertEquals(mc.schwimmSpiel!!.spieler[0].spielerName,"Sadoun")
     }
     /**
      * Teste, ob die aktuellerSpielerIndex erhört wird, wenn die Methode

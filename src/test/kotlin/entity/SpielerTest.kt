@@ -18,9 +18,9 @@ class SpielerTest {
         spieler1.hand.add(SchwimmKarte(CardSuit.HEARTS,CardValue.SEVEN))
         spieler1.hand.add(SchwimmKarte(CardSuit.DIAMONDS,CardValue.SEVEN))
         spieler1.hand.add(SchwimmKarte(CardSuit.SPADES,CardValue.SEVEN))
-        spieler2.hand.add(SchwimmKarte(CardSuit.SPADES,CardValue.NINE))
-        spieler2.hand.add(SchwimmKarte(CardSuit.SPADES,CardValue.ACE))
-        spieler2.hand.add(SchwimmKarte(CardSuit.SPADES,CardValue.JACK))
+        spieler2.hand.add(SchwimmKarte(CardSuit.HEARTS,CardValue.EIGHT))
+        spieler2.hand.add(SchwimmKarte(CardSuit.DIAMONDS,CardValue.SEVEN))
+        spieler2.hand.add(SchwimmKarte(CardSuit.SPADES,CardValue.SEVEN))
     }
 
     /**
@@ -49,7 +49,7 @@ class SpielerTest {
     fun summePunkteTest ()
     {
         assertEquals(spieler1.summePunkte(),30.5)
-        assertEquals(spieler2.summePunkte(),30.0)
+        assertEquals(spieler2.summePunkte(),8.0)
 
     }
 }

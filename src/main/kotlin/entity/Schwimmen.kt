@@ -25,4 +25,7 @@ class Schwimmen(val spieler: ArrayDeque<Spieler>, val karten:ArrayDeque<SchwimmK
    {
       karte.forEach(this.karten::addFirst)
    }
+    fun getName(): String {
+        return spieler[aktuellerSpielerIndex].spielerName
+    }
 }

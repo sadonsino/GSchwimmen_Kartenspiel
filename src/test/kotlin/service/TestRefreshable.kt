@@ -13,13 +13,7 @@ class TestRefreshable : Refreshable{
         private set
     var refreshNachNeuemSpieler : Boolean = false
         private set
-    var refreshNachKartenTauschenMitte : Boolean = false
-        private set
-    var refreshNachKartenTauschenHand : Boolean = false
-        private set
-    var refreshNachKlopfen : Boolean = false
-        private set
-    var refreshNachPassen : Boolean = false
+    var refreshNachZugMittegeandert : Boolean = false
         private set
 
     /**
@@ -28,10 +22,7 @@ class TestRefreshable : Refreshable{
     fun reset() {
         refreshNachSpielende = false
         refreshNachNeuemSpieler = false
-        refreshNachKartenTauschenMitte = false
-        refreshNachKartenTauschenHand = false
-        refreshNachKlopfen = false
-        refreshNachPassen = false
+        refreshNachZugMittegeandert = false
 
     }
     override fun refreshNachSpielStarten() {
@@ -43,17 +34,8 @@ class TestRefreshable : Refreshable{
     override fun refreshNachNeuemSpieler() {
         refreshNachNeuemSpieler = true
     }
-    override fun refreshNachKartenTauschenMitte() {
-        refreshNachKartenTauschenMitte = true
-    }
-    override fun refreshNachKartenTauschenHand() {
-        refreshNachKartenTauschenHand = true
-    }
-    override fun refreshNachKlopfen() {
-        refreshNachKlopfen = true
-    }
-    override fun refreshNachPassen() {
-        refreshNachPassen = true
+    override fun refreshNachZugMittegeandert() {
+        refreshNachZugMittegeandert = true
     }
 
 

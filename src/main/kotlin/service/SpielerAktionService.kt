@@ -24,8 +24,7 @@ class SpielerAktionService(private val schwimmenService: SchwimmenService) : Abs
         aktullerSpieler.hand = schwimmSpiel.mitte
         schwimmSpiel.mitte = temp
         schwimmenService.spielService.naechsterSpieler()
-        onAllRefreshables { refreshNachKartenTauschenHand() }
-        onAllRefreshables { refreshNachKartenTauschenMitte() }
+        onAllRefreshables { refreshNachZugMittegeandert() }
 
     }
     /**
@@ -59,9 +58,9 @@ class SpielerAktionService(private val schwimmenService: SchwimmenService) : Abs
         }
         schwimmSpiel.mitte[mittePosition] = handKarte
         aktullerSpieler.hand[handPosition] = mittKarte
+        onAllRefreshables { refreshNachZugMittegeandert() }
         schwimmenService.spielService.naechsterSpieler()
-        onAllRefreshables { refreshNachKartenTauschenHand() }
-        onAllRefreshables { refreshNachKartenTauschenMitte() }
+
 
     }
     /**
@@ -81,8 +80,9 @@ class SpielerAktionService(private val schwimmenService: SchwimmenService) : Abs
         {
             schwimmenService.spielService.mitteErneuren()
         }
+        onAllRefreshables { refreshNachZugMittegeandert() }
         schwimmenService.spielService.naechsterSpieler()
-        onAllRefreshables { refreshNachPassen() }
+
 
     }
     /**
@@ -94,7 +94,8 @@ class SpielerAktionService(private val schwimmenService: SchwimmenService) : Abs
         checkNotNull(schwimmSpiel)
         schwimmSpiel.passIndex = 0
         schwimmSpiel.klopfIndexe++
+        onAllRefreshables { refreshNachZugMittegeandert() }
         schwimmenService.spielService.naechsterSpieler()
-        onAllRefreshables { refreshNachKlopfen() }
+
     }
 }

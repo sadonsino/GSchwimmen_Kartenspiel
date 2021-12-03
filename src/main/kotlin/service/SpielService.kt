@@ -11,11 +11,17 @@ class SpielService(private val schwimmenService : SchwimmenService) : AbstractRe
 {
     /**
      * Start ein neues Spiel
-     * @param spielerArray ist ein Feld von Typ Spieler
+     * @param spielerArrayString ist ein Feld von Typ String
      */
 
-    fun spielStarten (spielerArray: ArrayDeque<Spieler>)
+    fun spielStarten (spielerArrayString: ArrayDeque<String>)
     {
+        val spielerArray : ArrayDeque<Spieler> =  ArrayDeque<Spieler>(4)
+        for (i in 0 until spielerArrayString.size)
+        {
+            spielerArray.add(Spieler(spielerArrayString[i]))
+        }
+
        val karten : ArrayDeque<SchwimmKarte> = ArrayDeque(32)
         val schwimmSpiel1 = Schwimmen(spielerArray,karten)
         schwimmSpiel1.kartenHinzufuegen(defaultRandomCardList())
@@ -61,11 +67,17 @@ class SpielService(private val schwimmenService : SchwimmenService) : AbstractRe
     {
         val schwimmSpiel = schwimmenService.schwimmSpiel
         checkNotNull(schwimmSpiel)
-            if (!beendeSpiel()&&schwimmSpiel.aktuellerSpielerIndex == schwimmSpiel.spieler.size - 1)
+            if (!beendeSpiel())
             {
+                if (schwimmSpiel.aktuellerSpielerIndex == schwimmSpiel.spieler.size - 1)
+                {
                 schwimmSpiel.aktuellerSpielerIndex = 0
+                }
+                else schwimmSpiel.aktuellerSpielerIndex++
+                onAllRefreshables { refreshNachNeuemSpieler() }
             }
-            else schwimmSpiel.aktuellerSpielerIndex++
+        else onAllRefreshables { refreshNachSpielende() }
+
 
     }
     /**
@@ -90,7 +102,7 @@ class SpielService(private val schwimmenService : SchwimmenService) : AbstractRe
         checkNotNull(schwimmSpiel)
         if (schwimmSpiel.karten.size<3)
         {
-            beendeSpiel()
+            onAllRefreshables { refreshNachSpielende() }
         }
         else
         {
@@ -105,8 +117,10 @@ class SpielService(private val schwimmenService : SchwimmenService) : AbstractRe
             }
 
             schwimmSpiel.passIndex=0
+            onAllRefreshables { refreshNachZugMittegeandert() }
 
         }
 
     }
+
 }
